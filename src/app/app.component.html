@@ -1,0 +1,18 @@
+<button (click)="updateStatus()">Update Value</button>
+<ng-container *ngIf="status$">
+  <div>{{ status$.returnValue | json }}</div>
+</ng-container>
+<br />
+<button (click)="postConfig()">Configure</button>
+<br />
+<button (click)="postUnconfig()">Unconfigure</button>
+<br />
+<button (click)="postStart(1)">Start</button>
+<br />
+<button (click)="postStop()">Stop</button>
+<br />
+<button (click)="(postConfigAndStart)">ConfigAndStart</button>
+<br />
+<button (click)="postStopAndUnconfig()">StopAndUnconfig</button>
+<br />
+<button (click)="postDryRun()">DryRun</button>

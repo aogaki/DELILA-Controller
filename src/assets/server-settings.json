@@ -1,0 +1,12 @@
+{
+    "apiAddress": "172.18.4.56:8000",
+    "rootDir": "DELILA",
+    "getStatus": "get-status",
+    "configure": "configure",
+    "unconfigure": "unconfigure",
+    "start": "start",
+    "stop": "stop",
+    "configureAndStart": "configure-and-start",
+    "stopAndUnconfigure": "stop-and-unconfigure",
+    "dryRun": "dry-run"
+}
