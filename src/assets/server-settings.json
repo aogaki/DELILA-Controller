@@ -8,5 +8,10 @@
     "stop": "stop",
     "configureAndStart": "configure-and-start",
     "stopAndUnconfigure": "stop-and-unconfigure",
-    "dryRun": "dry-run"
+    "dryRun": "dry-run",
+    "dbDir": "DELILA-DB",
+    "createRecord": "create-new-run-record",
+    "getRecords": "read-run-list",
+    "updateRecord": "update-run-record",
+    "monitorAddress": "172.18.4.77:8080"
 }

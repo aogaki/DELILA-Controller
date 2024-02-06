@@ -9,4 +9,14 @@ export interface ServerSettings {
   configureAndStart: string;
   stopAndUnconfigure: string;
   dryRun: string;
+  dbDir: string;
+  createRecord: string;
+  getRecords: string;
+  updateRecord: string;
+  monitorAddress: string;
+}
+
+export interface ExperimentSettings {
+  expName: string;
+  computerName: string;
 }
