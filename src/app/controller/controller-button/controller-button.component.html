@@ -1,0 +1,52 @@
+<div class="example-button-row">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onPostConfig()"
+    [disabled]="!this.daqButtonState.configure"
+  >
+    <mat-icon>settings</mat-icon> Config
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostStart()"
+    [disabled]="!this.daqButtonState.start"
+  >
+    <mat-icon>play_arrow</mat-icon> Start
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostStop()"
+    [disabled]="!this.daqButtonState.stop"
+  >
+    <mat-icon>stop</mat-icon> Stop
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onPostUnconfig()"
+    [disabled]="!this.daqButtonState.unconfigure"
+  >
+    <mat-icon>settings</mat-icon> Unconfig
+  </button>
+</div>
+<div>
+  <mat-form-field class="run-number">
+    <input
+      type="number"
+      matInput
+      placeholder="Next run number"
+      [disabled]="this.autoIncFlag"
+      [(ngModel)]="this.nextRunNo"
+    />
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="this.autoIncFlag"
+    >Autoincrement run number</mat-checkbox
+  >
+</div>
+
+@if (this.spinnerFlag) {
+<mat-spinner>test</mat-spinner>
+}

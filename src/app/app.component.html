@@ -1,36 +1,5 @@
-<input type="number" [(ngModel)]="runNo" />
-<br />
-<button (click)="updateStatus()">Update Value</button>
-@if (status$) {
-<ng-container>
-  <div>{{ status$.returnValue | json }}</div>
-</ng-container>
-}
-<br />
-<button (click)="postConfig()">Configure</button>
-<br />
-<button (click)="postUnconfig()">Unconfigure</button>
-<br />
-<button (click)="postStart(runNo)">Start</button>
-<br />
-<button (click)="postStop()">Stop</button>
-<br />
-<button (click)="postConfigAndStart(runNo)">ConfigAndStart</button>
-<br />
-<button (click)="postStopAndUnconfig()">StopAndUnconfig</button>
-<br />
-<button (click)="postDryRun()">DryRun</button>
-<br />
-<button (click)="createRecord()">NewRun</button>
-<br />
-<button (click)="updateRecord()">Stop</button>
-<br />
-<button (click)="getRunLog(1)">GetRunLog</button>
-@if (records$) {
-<ng-container>
-  <div>{{ records$ | json }}</div>
-</ng-container>
-}
+<app-controller></app-controller>
+
 <br />
 <button (click)="getHist()">GetHist</button>
 <div id="hist" style="width: 800px; height: 800px"></div>

@@ -1,5 +1,5 @@
 {
-    "apiAddress": "172.18.4.56:8000",
+    "apiAddress": "172.18.4.77:8000",
     "rootDir": "DELILA",
     "getStatus": "get-status",
     "configure": "configure",
