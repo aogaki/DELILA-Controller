@@ -17,15 +17,10 @@ export class AppComponent {
   constructor() {}
 
   getHist() {
-    const filename = "http://localhost:8080/HistFront/root.json.gz";
+    const filename = "http://172.18.4.77:8080/SiHist_front/root.json.gz";
     let obj = httpRequest(filename, "object").then((obj: any) => {
       cleanup("hist");
       redraw("hist", obj, "hist");
     });
-
-    // this.delila.getHistogram("Brd00/ADC00_00").subscribe((response) => {
-    //   let obj = parse(response);
-    //   draw("hist", obj, "hist");
-    // });
   }
 }

@@ -1,4 +1,18 @@
 <h1 style="text-align: center">
   {{ this.expName }} &#64; {{ this.computerName }}
 </h1>
-<app-controller-button></app-controller-button>
+
+<app-controller-button
+  (statusChange)="updateStatus($event)"
+  (runRecordChange)="updateRunRecord($event)"
+></app-controller-button>
+
+<app-controller-current-run
+  [currentRun]="this.currentRun"
+></app-controller-current-run>
+
+<app-controller-delila-status
+  [status]="this.status"
+></app-controller-delila-status>
+
+<app-controller-run-list [runRecord]="this.runRecord"></app-controller-run-list>

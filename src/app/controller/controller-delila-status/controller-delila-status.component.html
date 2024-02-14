@@ -1,0 +1,31 @@
+@if (this.status !== undefined) {
+<mat-table
+  [dataSource]="this.status.returnValue.logs.log"
+  class="mat-elevation-z8"
+>
+  <ng-container matColumnDef="compName">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let component"> {{ component.compName }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <mat-header-cell *matHeaderCellDef> State </mat-header-cell>
+    <mat-cell *matCellDef="let component"> {{ component.state }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="eventNum">
+    <mat-header-cell *matHeaderCellDef> Data size </mat-header-cell>
+    <mat-cell *matCellDef="let component"> {{ component.eventNum }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="compStatus">
+    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+    <mat-cell *matCellDef="let component">
+      {{ component.compStatus }}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+}

@@ -1,10 +1,10 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, inject, Output, EventEmitter, OnInit } from "@angular/core";
 import { DelilaStatus, compStatus } from "../../delila-response";
 import { DelilaService } from "../../delila.service";
 import { RunLog } from "../../run-log";
 
 import { CommonModule } from "@angular/common";
-import { FormsModule, NgForm } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
@@ -13,7 +13,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatButtonModule } from "@angular/material/button";
 
-interface DAQButtonState {
+interface DelilaButton {
   configure: boolean;
   unconfigure: boolean;
   start: boolean;
@@ -39,7 +39,7 @@ interface DAQButtonState {
   templateUrl: "./controller-button.component.html",
   styleUrl: "./controller-button.component.css",
 })
-export class ControllerButtonComponent {
+export class ControllerButtonComponent implements OnInit {
   nextRunNo: number = 1;
   runNo = -1;
   computerName: string = "localhost";
@@ -49,7 +49,7 @@ export class ControllerButtonComponent {
   spinnerFlag: boolean = false;
   logs: compStatus[] = [];
 
-  status$!: DelilaStatus;
+  delilaStatus$!: DelilaStatus;
   @Output() statusChange = new EventEmitter<DelilaStatus>();
 
   currentRun: RunLog = {
@@ -61,10 +61,13 @@ export class ControllerButtonComponent {
     source: "",
     distance: "",
   };
-  @Output() currentRunChange = new EventEmitter<RunLog>();
+  runRecord$?: RunLog[];
+  @Output() runRecordChange = new EventEmitter<RunLog[]>();
 
   // constructor() {}
   constructor(private delila: DelilaService) {}
+  recordLength = 10;
+  updateInterval = 1000;
 
   // private readonly delila = inject(DelilaService);
   ngOnInit() {
@@ -74,29 +77,16 @@ export class ControllerButtonComponent {
       this.currentRun.expName = response.expName;
       this.computerName = response.computerName;
 
-      this.delila
-        .getRunLog(this.currentRun.expName, 1)
-        .subscribe((response) => {
-          this.records$ = response;
-
-          if (this.records$?.length > 0) {
-            this.currentRun.runNumber = this.records$[0].runNumber;
-            this.nextRunNo = this.currentRun.runNumber + 1;
-            this.lastRun = this.records$[0];
-          }
-        });
-
       this.onGetStatus();
-      this.getRunLog(10);
+      this.getRunLog(this.recordLength);
     });
 
     setInterval(() => {
       this.onGetStatus();
-      this.getRunLog(10);
-    }, 1000);
+    }, this.updateInterval);
   }
 
-  daqButtonState: DAQButtonState = {
+  daqButtonState: DelilaButton = {
     configure: false,
     unconfigure: false,
     start: false,
@@ -123,9 +113,9 @@ export class ControllerButtonComponent {
           this.connFlag = false;
         } else {
           this.connFlag = true;
-          this.status$ = response.response;
-          this.statusChange.emit(this.status$);
-          this.logs = this.status$.returnValue.logs["log"];
+          this.delilaStatus$ = response.response;
+          this.statusChange.emit(this.delilaStatus$);
+          this.logs = this.delilaStatus$.returnValue.logs["log"];
           const state = this.logs[0].state;
           switch (state) {
             case "LOADED":
@@ -186,20 +176,21 @@ export class ControllerButtonComponent {
       this.createRecord();
       this.checkStatusFlag = true;
       this.onGetStatus();
-      this.getRunLog(10);
+      this.getRunLog(this.recordLength);
     });
   }
 
   onPostStop() {
     this.checkStatusFlag = false;
     this.spinnerFlag = true;
+    this.daqButtonState.stop = false;
     this.delila.postStop().subscribe((response) => {
       console.log("Stop posted", response);
       this.updateRecord();
       this.checkStatusFlag = true;
       this.onGetStatus();
       this.spinnerFlag = false;
-      this.getRunLog(10);
+      this.getRunLog(this.recordLength);
     });
   }
 
@@ -224,6 +215,7 @@ export class ControllerButtonComponent {
   createRecord() {
     this.currentRun.runNumber = this.runNo;
     this.currentRun.start = Date.now();
+    this.currentRun.stop = 0;
     this.delila.createRecord(this.currentRun).subscribe((response) => {
       console.log("Record created", response);
     });
@@ -236,20 +228,18 @@ export class ControllerButtonComponent {
     });
   }
 
-  lastRun!: RunLog;
-  records$?: RunLog[];
   getRunLog(size: number) {
     this.delila
       .getRunLog(this.currentRun.expName, size)
       .subscribe((response) => {
-        this.records$ = response;
-
-        if (this.records$?.length > 0) {
-          this.currentRun.runNumber = this.records$[0].runNumber;
+        this.runRecord$ = response;
+        this.runRecordChange.emit(this.runRecord$);
+        if (this.runRecord$?.length > 0) {
+          this.currentRun.runNumber = this.runRecord$[0].runNumber;
           if (this.autoIncFlag) {
             this.nextRunNo = this.currentRun.runNumber + 1;
           }
-          this.lastRun = this.records$[0];
+          this.currentRun = this.runRecord$[0];
         }
       });
   }

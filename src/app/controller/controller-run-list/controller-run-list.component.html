@@ -1,0 +1,27 @@
+<h3>Run log</h3>
+@if(runRecord !== undefined && runRecord.length > 0){
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let run of runRecord">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Run {{ run.runNumber }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list-item>Run number: {{ run.runNumber }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item
+      >Start:
+      {{ run.start | date : "YYYY-MM-dd, 'week 'w, HH:mm:ss" }}</mat-list-item
+    >
+    <mat-divider></mat-divider>
+    <mat-list-item
+      >Stop:
+      {{ run.stop | date : "YYYY-MM-dd, 'week 'w, HH:mm:ss" }}</mat-list-item
+    >
+    <mat-divider></mat-divider>
+    <mat-list-item>Source: {{ run.source }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Distance: {{ run.distance }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Run information: {{ run.comment }}</mat-list-item>
+  </mat-expansion-panel>
+</mat-accordion>
+}
