@@ -20,6 +20,8 @@ interface DelilaButton {
   stop: boolean;
   pause: boolean;
   resume: boolean;
+  confAndStart: boolean;
+  stopAndUnconf: boolean;
 }
 
 @Component({
@@ -93,6 +95,8 @@ export class ControllerButtonComponent implements OnInit {
     stop: false,
     pause: false,
     resume: false,
+    confAndStart: false,
+    stopAndUnconf: false,
   };
 
   ResetState() {
@@ -103,6 +107,8 @@ export class ControllerButtonComponent implements OnInit {
       stop: false,
       pause: false,
       resume: false,
+      confAndStart: false,
+      stopAndUnconf: false,
     };
   }
 
@@ -121,18 +127,21 @@ export class ControllerButtonComponent implements OnInit {
             case "LOADED":
               this.ResetState();
               this.daqButtonState.configure = true;
+              this.daqButtonState.confAndStart = true;
               break;
 
             case "CONFIGURED":
               this.ResetState();
               this.daqButtonState.start = true;
               this.daqButtonState.unconfigure = true;
+              this.daqButtonState.confAndStart = true;
               break;
 
             case "RUNNING":
               this.ResetState();
               this.daqButtonState.stop = true;
               this.daqButtonState.pause = true;
+              this.daqButtonState.stopAndUnconf = true;
               break;
 
             case "PAUSED":
@@ -194,21 +203,40 @@ export class ControllerButtonComponent implements OnInit {
     });
   }
 
-  onPostConfigAndStart(runNo: number) {
-    this.delila.postConfigAndStart(runNo).subscribe((response) => {
+  onPostConfigAndStart() {
+    this.checkStatusFlag = false;
+    this.runNo = this.nextRunNo;
+    this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
+    this.delila.postConfigAndStart(this.runNo).subscribe((response) => {
       console.log("Config and start posted", response);
+      this.createRecord();
+      this.checkStatusFlag = true;
+      this.onGetStatus();
+      this.getRunLog(this.recordLength);
     });
   }
 
   onPostStopAndUnconfig() {
+    this.checkStatusFlag = false;
+    this.spinnerFlag = true;
+    this.daqButtonState.stop = false;
     this.delila.postStopAndUnconfig().subscribe((response) => {
       console.log("Stop and unconfig posted", response);
+      this.updateRecord();
+      this.checkStatusFlag = true;
+      this.onGetStatus();
+      this.spinnerFlag = false;
+      this.getRunLog(this.recordLength);
     });
   }
 
   onPostDryRun() {
+    this.checkStatusFlag = false;
     this.delila.postDryRun().subscribe((response) => {
       console.log("Dry run posted", response);
+      this.checkStatusFlag = true;
+      this.onGetStatus();
+      this.getRunLog(this.recordLength);
     });
   }
 

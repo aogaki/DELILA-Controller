@@ -46,6 +46,32 @@
   >
     <mat-icon>settings</mat-icon> Unconfig
   </button>
+  <br />
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostConfigAndStart()"
+    [disabled]="!this.daqButtonState.confAndStart"
+  >
+    <mat-icon>play_arrow</mat-icon> Conf & Start
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostStopAndUnconfig()"
+    [disabled]="!this.daqButtonState.stopAndUnconf"
+  >
+    <mat-icon>stop</mat-icon> Stop & Unconf
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostDryRun()"
+    [disabled]="!this.daqButtonState.confAndStart"
+  >
+    <mat-icon>play_arrow</mat-icon> Dry Run
+  </button>
 </div>
 
 @if (this.spinnerFlag) {
