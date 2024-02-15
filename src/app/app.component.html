@@ -1,4 +1,17 @@
-<app-controller></app-controller>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="delila-name">DELILA</span>
+    <mat-button-toggle-group appearance="legacy" [(ngModel)]="localtion">
+      <mat-button-toggle value="controller" (click)="onClickController()"
+        >Controller</mat-button-toggle
+      >
+      <mat-button-toggle value="monitor" (click)="onClickMonitor()"
+        >Monitor</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
 
 <br />
 <button (click)="getHist()">GetHist</button>

@@ -1,20 +1,47 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterOutlet } from "@angular/router";
+import { Router, RouterOutlet } from "@angular/router";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+
 import { httpRequest, draw, redraw, resize, cleanup, parse } from "jsroot";
 import { ControllerComponent } from "./controller/controller.component";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ControllerComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterOutlet,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonToggleModule,
+    ControllerComponent,
+  ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "DELILA-Controller";
+  localtion!: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
+  ngOnInit() {
+    this.onClickController();
+  }
+
+  onClickController() {
+    this.localtion = "controller";
+    this.router.navigate([this.localtion]);
+  }
+
+  onClickMonitor() {
+    this.localtion = "monitor";
+    this.router.navigate([this.localtion]);
+  }
 
   getHist() {
     const filename = "http://172.18.4.77:8080/SiHist_front/root.json.gz";

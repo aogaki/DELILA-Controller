@@ -4,6 +4,7 @@ import { ServerSettings, ExperimentSettings } from "./server-settings";
 import { Observable } from "rxjs";
 import { DelilaResponse } from "./delila-response";
 import { RunLog } from "./run-log";
+import { MonitorLinks } from "./monitor-links";
 
 @Injectable({
   providedIn: "root",
@@ -77,12 +78,6 @@ export class DelilaService {
     return this.http.get<RunLog[]>(url);
   }
 
-  loadExperimentSettings(): Observable<ExperimentSettings> {
-    return this.http.get<ExperimentSettings>(
-      "/assets/experiment-settings.json"
-    );
-  }
-
   getHistogram(name: string): Observable<any> {
     const url =
       "http://" +
@@ -91,6 +86,12 @@ export class DelilaService {
       name +
       "/root.json.gz";
     return this.http.get<any>(url);
+  }
+
+  loadExperimentSettings(): Observable<ExperimentSettings> {
+    return this.http.get<ExperimentSettings>(
+      "/assets/experiment-settings.json"
+    );
   }
 
   loadServerSettings() {
@@ -110,5 +111,9 @@ export class DelilaService {
           this.serverSettings.dbDir;
         console.log("Server settings loaded", this.serverSettings);
       });
+  }
+
+  getMonitorLinks(): Observable<MonitorLinks[]> {
+    return this.http.get<MonitorLinks[]>("/assets/monitor-links.json");
   }
 }

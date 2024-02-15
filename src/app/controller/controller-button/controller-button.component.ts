@@ -1,4 +1,10 @@
-import { Component, inject, Output, EventEmitter, OnInit } from "@angular/core";
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  HostListener,
+} from "@angular/core";
 import { DelilaStatus, compStatus } from "../../delila-response";
 import { DelilaService } from "../../delila.service";
 import { RunLog } from "../../run-log";
@@ -66,6 +72,15 @@ export class ControllerButtonComponent implements OnInit {
   runRecord$?: RunLog[];
   @Output() runRecordChange = new EventEmitter<RunLog[]>();
 
+  @HostListener("document:visibilitychange", ["$event"])
+  appVisibility(): boolean {
+    if (document.hidden) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   // constructor() {}
   constructor(private delila: DelilaService) {}
   recordLength = 10;
@@ -84,7 +99,7 @@ export class ControllerButtonComponent implements OnInit {
     });
 
     setInterval(() => {
-      this.onGetStatus();
+      if (this.appVisibility()) this.onGetStatus();
     }, this.updateInterval);
   }
 

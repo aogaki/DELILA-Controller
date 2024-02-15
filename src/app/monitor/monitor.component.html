@@ -1,0 +1,13 @@
+@if (this.links !== undefined) { @for (link of links; track $index) {
+<button class="link-buttons">
+  <a
+    mat-stroked-button
+    color="link"
+    href="{{ link.url }}"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <mat-icon>link</mat-icon>{{ link.name }}
+  </a>
+</button>
+} }
