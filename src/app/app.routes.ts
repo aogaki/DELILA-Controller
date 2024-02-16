@@ -6,4 +6,5 @@ export const routes: Routes = [
   { path: "controller", component: ControllerComponent },
   { path: "monitor", component: MonitorComponent },
   { path: "", redirectTo: "/controller", pathMatch: "full" },
+  { path: "**", redirectTo: "/controller", pathMatch: "full" },
 ];

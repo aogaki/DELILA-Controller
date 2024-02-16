@@ -6,7 +6,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 import { httpRequest, draw, redraw, resize, cleanup, parse } from "jsroot";
-import { ControllerComponent } from "./controller/controller.component";
 import { FormsModule } from "@angular/forms";
 
 @Component({
@@ -19,7 +18,6 @@ import { FormsModule } from "@angular/forms";
     MatToolbarModule,
     MatIconModule,
     MatButtonToggleModule,
-    ControllerComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

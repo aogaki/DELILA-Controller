@@ -1,15 +1,15 @@
-import { DelilaService } from "./../delila.service";
-import { Component, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ControllerButtonComponent } from "./controller-button/controller-button.component";
-import { DelilaStatus } from "../delila-response";
-import { RunLog } from "../run-log";
-import { ControllerCurrentRunComponent } from "./controller-current-run/controller-current-run.component";
-import { ControllerDelilaStatusComponent } from "./controller-delila-status/controller-delila-status.component";
-import { ControllerRunListComponent } from "./controller-run-list/controller-run-list.component";
+import { DelilaService } from './../delila.service';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ControllerButtonComponent } from './controller-button/controller-button.component';
+import { DelilaStatus } from '../delila-response';
+import { RunLog } from '../run-log';
+import { ControllerCurrentRunComponent } from './controller-current-run/controller-current-run.component';
+import { ControllerDelilaStatusComponent } from './controller-delila-status/controller-delila-status.component';
+import { ControllerRunListComponent } from './controller-run-list/controller-run-list.component';
 
 @Component({
-  selector: "app-controller",
+  selector: 'app-controller',
   standalone: true,
   imports: [
     CommonModule,
@@ -18,12 +18,12 @@ import { ControllerRunListComponent } from "./controller-run-list/controller-run
     ControllerDelilaStatusComponent,
     ControllerRunListComponent,
   ],
-  templateUrl: "./controller.component.html",
-  styleUrl: "./controller.component.css",
+  templateUrl: './controller.component.html',
+  styleUrl: './controller.component.css',
 })
 export class ControllerComponent implements OnInit {
-  computerName = "localhost";
-  expName = "test";
+  computerName = 'localhost';
+  expName = 'test';
 
   status!: DelilaStatus;
   updateStatus(status: DelilaStatus) {

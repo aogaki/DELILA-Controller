@@ -4,20 +4,20 @@ import {
   EventEmitter,
   OnInit,
   HostListener,
-} from "@angular/core";
-import { DelilaStatus, compStatus } from "../../delila-response";
-import { DelilaService } from "../../delila.service";
-import { RunLog } from "../../run-log";
+} from '@angular/core';
+import { DelilaStatus, compStatus } from '../../delila-response';
+import { DelilaService } from '../../delila.service';
+import { RunLog } from '../../run-log';
 
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { MatIconModule } from "@angular/material/icon";
-import { MatSelectModule } from "@angular/material/select";
-import { MatInputModule } from "@angular/material/input";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatButtonModule } from "@angular/material/button";
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
 
 interface DelilaButton {
   configure: boolean;
@@ -31,7 +31,7 @@ interface DelilaButton {
 }
 
 @Component({
-  selector: "app-controller-button",
+  selector: 'app-controller-button',
   standalone: true,
   imports: [
     CommonModule,
@@ -44,13 +44,13 @@ interface DelilaButton {
     MatProgressSpinnerModule,
     FormsModule,
   ],
-  templateUrl: "./controller-button.component.html",
-  styleUrl: "./controller-button.component.css",
+  templateUrl: './controller-button.component.html',
+  styleUrl: './controller-button.component.css',
 })
 export class ControllerButtonComponent implements OnInit {
   nextRunNo: number = 1;
   runNo = -1;
-  computerName: string = "localhost";
+  computerName: string = 'localhost';
   autoIncFlag: boolean = true;
   connFlag: boolean = false;
   checkStatusFlag: boolean = true;
@@ -64,15 +64,15 @@ export class ControllerButtonComponent implements OnInit {
     runNumber: 1234,
     start: 0,
     stop: 0,
-    expName: "",
-    comment: "",
-    source: "",
-    distance: "",
+    expName: '',
+    comment: '',
+    source: '',
+    distance: '',
   };
   runRecord$?: RunLog[];
   @Output() runRecordChange = new EventEmitter<RunLog[]>();
 
-  @HostListener("document:visibilitychange", ["$event"])
+  @HostListener('document:visibilitychange', ['$event'])
   appVisibility(): boolean {
     if (document.hidden) {
       return false;
@@ -90,7 +90,7 @@ export class ControllerButtonComponent implements OnInit {
   ngOnInit() {
     this.delila.loadServerSettings();
     this.delila.loadExperimentSettings().subscribe((response) => {
-      console.log("Experiment settings loaded", response);
+      console.log('Experiment settings loaded', response);
       this.currentRun.expName = response.expName;
       this.computerName = response.computerName;
 
@@ -136,30 +136,30 @@ export class ControllerButtonComponent implements OnInit {
           this.connFlag = true;
           this.delilaStatus$ = response.response;
           this.statusChange.emit(this.delilaStatus$);
-          this.logs = this.delilaStatus$.returnValue.logs["log"];
+          this.logs = this.delilaStatus$.returnValue.logs['log'];
           const state = this.logs[0].state;
           switch (state) {
-            case "LOADED":
+            case 'LOADED':
               this.ResetState();
               this.daqButtonState.configure = true;
               this.daqButtonState.confAndStart = true;
               break;
 
-            case "CONFIGURED":
+            case 'CONFIGURED':
               this.ResetState();
               this.daqButtonState.start = true;
               this.daqButtonState.unconfigure = true;
               this.daqButtonState.confAndStart = true;
               break;
 
-            case "RUNNING":
+            case 'RUNNING':
               this.ResetState();
               this.daqButtonState.stop = true;
               this.daqButtonState.pause = true;
               this.daqButtonState.stopAndUnconf = true;
               break;
 
-            case "PAUSED":
+            case 'PAUSED':
               this.ResetState();
               this.daqButtonState.start = true;
               this.daqButtonState.resume = true;
@@ -176,7 +176,7 @@ export class ControllerButtonComponent implements OnInit {
   onPostConfig() {
     this.checkStatusFlag = false;
     this.delila.postConfig().subscribe((response) => {
-      console.log("Config posted", response);
+      console.log('Config posted', response);
       this.checkStatusFlag = true;
       this.onGetStatus();
     });
@@ -185,7 +185,7 @@ export class ControllerButtonComponent implements OnInit {
   onPostUnconfig() {
     this.checkStatusFlag = false;
     this.delila.postUnconfig().subscribe((response) => {
-      console.log("Unconfig posted", response);
+      console.log('Unconfig posted', response);
       this.checkStatusFlag = true;
       this.onGetStatus();
     });
@@ -196,7 +196,7 @@ export class ControllerButtonComponent implements OnInit {
     this.runNo = this.nextRunNo;
     this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
     this.delila.postStart(this.runNo).subscribe((response) => {
-      console.log("Start posted", response);
+      console.log('Start posted', response);
       this.createRecord();
       this.checkStatusFlag = true;
       this.onGetStatus();
@@ -209,7 +209,7 @@ export class ControllerButtonComponent implements OnInit {
     this.spinnerFlag = true;
     this.daqButtonState.stop = false;
     this.delila.postStop().subscribe((response) => {
-      console.log("Stop posted", response);
+      console.log('Stop posted', response);
       this.updateRecord();
       this.checkStatusFlag = true;
       this.onGetStatus();
@@ -223,7 +223,7 @@ export class ControllerButtonComponent implements OnInit {
     this.runNo = this.nextRunNo;
     this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
     this.delila.postConfigAndStart(this.runNo).subscribe((response) => {
-      console.log("Config and start posted", response);
+      console.log('Config and start posted', response);
       this.createRecord();
       this.checkStatusFlag = true;
       this.onGetStatus();
@@ -236,7 +236,7 @@ export class ControllerButtonComponent implements OnInit {
     this.spinnerFlag = true;
     this.daqButtonState.stop = false;
     this.delila.postStopAndUnconfig().subscribe((response) => {
-      console.log("Stop and unconfig posted", response);
+      console.log('Stop and unconfig posted', response);
       this.updateRecord();
       this.checkStatusFlag = true;
       this.onGetStatus();
@@ -248,7 +248,7 @@ export class ControllerButtonComponent implements OnInit {
   onPostDryRun() {
     this.checkStatusFlag = false;
     this.delila.postDryRun().subscribe((response) => {
-      console.log("Dry run posted", response);
+      console.log('Dry run posted', response);
       this.checkStatusFlag = true;
       this.onGetStatus();
       this.getRunLog(this.recordLength);
@@ -260,14 +260,14 @@ export class ControllerButtonComponent implements OnInit {
     this.currentRun.start = Date.now();
     this.currentRun.stop = 0;
     this.delila.createRecord(this.currentRun).subscribe((response) => {
-      console.log("Record created", response);
+      console.log('Record created', response);
     });
   }
 
   updateRecord() {
     this.currentRun.stop = Date.now();
     this.delila.updateRecord(this.currentRun).subscribe((response) => {
-      console.log("Record updated", response);
+      console.log('Record updated', response);
     });
   }
 

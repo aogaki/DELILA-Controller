@@ -14,16 +14,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'DELILA-Controller' title`, () => {
+  it(`should have the 'material-test' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('DELILA-Controller');
+    expect(app.title).toEqual('material-test');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, DELILA-Controller');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, material-test'
+    );
   });
 });
