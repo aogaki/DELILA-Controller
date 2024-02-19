@@ -1,5 +1,5 @@
-@if (this.currentRun !== undefined) {<font color="red">
-  @if(this.currentRun.stop === 0){ Running } @else { Stopped }</font
+@if (this.currentRun !== undefined) {<font color="red"
+  ><h2>@if(this.currentRun.stop === 0){ Running } @else { Stopped }</h2></font
 >
 <mat-list>
   <mat-list-item>Run number: {{ this.currentRun.runNumber }} </mat-list-item>

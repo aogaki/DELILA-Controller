@@ -2,17 +2,27 @@
   {{ this.expName }} &#64; {{ this.computerName }}
 </h1>
 
-<app-controller-button
-  (statusChange)="updateStatus($event)"
-  (runRecordChange)="updateRunRecord($event)"
-></app-controller-button>
+<app-controller-input
+  [(nextRunNo)]="this.nextRunNo"
+  [(autoIncFlag)]="this.autoIncFlag"
+  [(comment)]="this.comment"
+  [(source)]="this.source"
+  [(distance)]="this.distance"
+  [buttonState]="this.daqButtonState"
+  [spinnerFlag]="this.spinnerFlag"
+></app-controller-input>
+<hr />
+
+<app-controller-timer></app-controller-timer>
+<hr />
 
 <app-controller-current-run
   [currentRun]="this.currentRun"
 ></app-controller-current-run>
+<hr />
 
 <app-controller-delila-status
-  [status]="this.status"
+  [status]="this.delilaStatus$"
 ></app-controller-delila-status>
 
 <app-controller-run-list [runRecord]="this.runRecord"></app-controller-run-list>

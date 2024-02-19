@@ -5,6 +5,7 @@ import { MonitorComponent } from "./monitor/monitor.component";
 export const routes: Routes = [
   { path: "controller", component: ControllerComponent },
   { path: "monitor", component: MonitorComponent },
+  { path: "dev", component: ControllerComponent },
   { path: "", redirectTo: "/controller", pathMatch: "full" },
   { path: "**", redirectTo: "/controller", pathMatch: "full" },
 ];

@@ -1,0 +1,42 @@
+<div>
+  <h2>Timer</h2>
+  <font style="color: red"
+    >Don't reload this page, when you use this timer.</font
+  >
+  <br />
+  <mat-form-field class="timer-field">
+    <mat-label>Hour</mat-label>
+    <input matInput type="number" [(ngModel)]="hour" /> </mat-form-field
+  ><mat-form-field class="timer-field">
+    <mat-label>Minute</mat-label>
+    <input matInput type="number" [(ngModel)]="minute" /> </mat-form-field
+  ><mat-form-field class="timer-field">
+    <mat-label>Second</mat-label>
+    <input matInput type="number" [(ngModel)]="second" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="startTimerAndRun()"
+    class="timer-button"
+  >
+    Run Start (automatically stop)
+  </button>
+  <br />
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="startTimer()"
+    class="timer-button"
+  >
+    Timer Start
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="stopTimer()"
+    class="timer-button"
+  >
+    Timer Stop
+  </button>
+</div>

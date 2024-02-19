@@ -1,0 +1,111 @@
+<div>
+  <mat-form-field class="run-number">
+    <input
+      type="number"
+      matInput
+      placeholder="Next run number"
+      [disabled]="this.autoIncFlag"
+      [(ngModel)]="this.nextRunNo"
+      (change)="onChangeNextRunNo()"
+    />Next run number
+  </mat-form-field>
+  <mat-checkbox
+    [(ngModel)]="this.autoIncFlag"
+    (change)="onChangeAutoIncFlag($event)"
+    >Autoincrement run number</mat-checkbox
+  >
+</div>
+
+<div class="example-button-row">
+  @if (this.devMode) {
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onPostConfig()"
+    [disabled]="!this.buttonState.configure"
+  >
+    <mat-icon>settings</mat-icon> Configure
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostStart()"
+    [disabled]="!this.buttonState.start"
+  >
+    <mat-icon>play_arrow</mat-icon> Start
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostStop()"
+    [disabled]="!this.buttonState.stop"
+  >
+    <mat-icon>stop</mat-icon> Stop
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onPostUnconfig()"
+    [disabled]="!this.buttonState.unconfigure"
+  >
+    <mat-icon>settings</mat-icon> Unconfigure
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostDryRun()"
+    [disabled]="!this.buttonState.confAndStart"
+  >
+    <mat-icon>play_arrow</mat-icon> Dry Run
+  </button>
+  <br />
+  }
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostConfigAndStart()"
+    [disabled]="!this.buttonState.confAndStart"
+  >
+    <mat-icon>play_arrow</mat-icon> Conf & Start
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPostStopAndUnconfig()"
+    [disabled]="!this.buttonState.stopAndUnconf"
+  >
+    <mat-icon>stop</mat-icon> Stop & Unconf
+  </button>
+</div>
+
+@if (this.spinnerFlag) {
+<div>
+  <h2>Data writing</h2>
+  <mat-spinner></mat-spinner>
+</div>
+}
+<mat-form-field class="small-field">
+  <mat-label>Source</mat-label>
+  <textarea
+    matInput
+    [(ngModel)]="this.source"
+    (input)="this.onChangeSource()"
+  ></textarea>
+</mat-form-field>
+<mat-form-field class="small-field">
+  <mat-label>Distance</mat-label>
+  <textarea
+    matInput
+    [(ngModel)]="this.distance"
+    (input)="this.onChangeDistance()"
+  ></textarea>
+</mat-form-field>
+<mat-form-field class="comment-field" appearance="fill">
+  <mat-label>Run information</mat-label>
+  <textarea
+    matInput
+    class="runInfo"
+    [(ngModel)]="this.comment"
+    (input)="this.onChangeComment()"
+  ></textarea>
+</mat-form-field>

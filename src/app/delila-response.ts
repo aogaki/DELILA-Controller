@@ -32,3 +32,14 @@ export interface DelilaStatus {
   methodName: string;
   returnValue: daqReturnValues;
 }
+
+export interface DelilaButton {
+  configure: boolean;
+  unconfigure: boolean;
+  start: boolean;
+  stop: boolean;
+  pause: boolean;
+  resume: boolean;
+  confAndStart: boolean;
+  stopAndUnconf: boolean;
+}

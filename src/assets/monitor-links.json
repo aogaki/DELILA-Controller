@@ -1,30 +1,30 @@
 [
     {
         "name": "Monitor browser",
-        "url": "http://172.18.6.59:8080/"
+        "url": "http://172.18.4.77:8080/"
     },
     {
         "name": "Si Histograms 1sec",
-        "url": "http://172.18.6.59:8080/?nobrowser&monitoring=1000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=1000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
     },
     {
         "name": "Si Histograms 5sec",
-        "url": "http://172.18.6.59:8080/?nobrowser&monitoring=5000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
     },
     {
         "name": "Brd00 Ch00 to 15",
-        "url": "http://172.18.6.59:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_00,Brd00/ADC00_01,Brd00/ADC00_02,Brd00/ADC00_03,Brd00/ADC00_04,Brd00/ADC00_05,Brd00/ADC00_06,Brd00/ADC00_07,Brd00/ADC00_08,Brd00/ADC00_09,Brd00/ADC00_10,Brd00/ADC00_11,Brd00/ADC00_12,Brd00/ADC00_13,Brd00/ADC00_14,Brd00/ADC00_15]"
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_00,Brd00/ADC00_01,Brd00/ADC00_02,Brd00/ADC00_03,Brd00/ADC00_04,Brd00/ADC00_05,Brd00/ADC00_06,Brd00/ADC00_07,Brd00/ADC00_08,Brd00/ADC00_09,Brd00/ADC00_10,Brd00/ADC00_11,Brd00/ADC00_12,Brd00/ADC00_13,Brd00/ADC00_14,Brd00/ADC00_15]"
     },
     {
         "name": "Brd00 Ch16 to 31",
-        "url": "http://172.18.6.59:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_16,Brd00/ADC00_17,Brd00/ADC00_18,Brd00/ADC00_19,Brd00/ADC00_20,Brd00/ADC00_21,Brd00/ADC00_22,Brd00/ADC00_23,Brd00/ADC00_24,Brd00/ADC00_25,Brd00/ADC00_26,Brd00/ADC00_27,Brd00/ADC00_28,Brd00/ADC00_29,Brd00/ADC00_30,Brd00/ADC00_31]"
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_16,Brd00/ADC00_17,Brd00/ADC00_18,Brd00/ADC00_19,Brd00/ADC00_20,Brd00/ADC00_21,Brd00/ADC00_22,Brd00/ADC00_23,Brd00/ADC00_24,Brd00/ADC00_25,Brd00/ADC00_26,Brd00/ADC00_27,Brd00/ADC00_28,Brd00/ADC00_29,Brd00/ADC00_30,Brd00/ADC00_31]"
     },
     {
         "name": "Brd00 Ch32 to 47",
-        "url": "http://172.18.6.59:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_32,Brd00/ADC00_33,Brd00/ADC00_34,Brd00/ADC00_35,Brd00/ADC00_36,Brd00/ADC00_37,Brd00/ADC00_38,Brd00/ADC00_39,Brd00/ADC00_40,Brd00/ADC00_41,Brd00/ADC00_42,Brd00/ADC00_43,Brd00/ADC00_44,Brd00/ADC00_45,Brd00/ADC00_46,Brd00/ADC00_47]"
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_32,Brd00/ADC00_33,Brd00/ADC00_34,Brd00/ADC00_35,Brd00/ADC00_36,Brd00/ADC00_37,Brd00/ADC00_38,Brd00/ADC00_39,Brd00/ADC00_40,Brd00/ADC00_41,Brd00/ADC00_42,Brd00/ADC00_43,Brd00/ADC00_44,Brd00/ADC00_45,Brd00/ADC00_46,Brd00/ADC00_47]"
     },
     {
         "name": "Brd00 Ch48 to 63",
-        "url": "http://172.18.6.59:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_48,Brd00/ADC00_49,Brd00/ADC00_50,Brd00/ADC00_51,Brd00/ADC00_52,Brd00/ADC00_53,Brd00/ADC00_54,Brd00/ADC00_55,Brd00/ADC00_56,Brd00/ADC00_57,Brd00/ADC00_58,Brd00/ADC00_59,Brd00/ADC00_60,Brd00/ADC00_61,Brd00/ADC00_62,Brd00/ADC00_63]"
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_48,Brd00/ADC00_49,Brd00/ADC00_50,Brd00/ADC00_51,Brd00/ADC00_52,Brd00/ADC00_53,Brd00/ADC00_54,Brd00/ADC00_55,Brd00/ADC00_56,Brd00/ADC00_57,Brd00/ADC00_58,Brd00/ADC00_59,Brd00/ADC00_60,Brd00/ADC00_61,Brd00/ADC00_62,Brd00/ADC00_63]"
     }
 ]
