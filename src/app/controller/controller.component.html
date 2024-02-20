@@ -2,27 +2,38 @@
   {{ this.expName }} &#64; {{ this.computerName }}
 </h1>
 
-<app-controller-input
-  [(nextRunNo)]="this.nextRunNo"
-  [(autoIncFlag)]="this.autoIncFlag"
-  [(comment)]="this.comment"
-  [(source)]="this.source"
-  [(distance)]="this.distance"
-  [buttonState]="this.daqButtonState"
-  [spinnerFlag]="this.spinnerFlag"
-></app-controller-input>
-<hr />
+<mat-grid-list
+  cols="{{ this.nCols }}"
+  rowHeight="400px"
+  (window:resize)="onResize($event)"
+>
+  <mat-grid-tile>
+    <app-controller-input
+      [(nextRunNo)]="this.nextRunNo"
+      [(autoIncFlag)]="this.autoIncFlag"
+      [(comment)]="this.comment"
+      [(source)]="this.source"
+      [(distance)]="this.distance"
+      [buttonState]="this.daqButtonState"
+      [spinnerFlag]="this.spinnerFlag"
+    ></app-controller-input
+  ></mat-grid-tile>
 
-<app-controller-timer></app-controller-timer>
-<hr />
+  <mat-grid-tile><app-controller-timer></app-controller-timer> </mat-grid-tile>
 
-<app-controller-current-run
-  [currentRun]="this.currentRun"
-></app-controller-current-run>
-<hr />
-
-<app-controller-delila-status
-  [status]="this.delilaStatus$"
-></app-controller-delila-status>
-
+  <mat-grid-tile>
+    <mat-grid-tile-header>
+      <h2>Current Run</h2>
+    </mat-grid-tile-header>
+    <app-controller-current-run
+      [currentRun]="this.currentRun"
+    ></app-controller-current-run
+  ></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-grid-tile-header> <h2>Components</h2> </mat-grid-tile-header
+    ><app-controller-delila-status
+      [status]="this.delilaStatus$"
+    ></app-controller-delila-status
+  ></mat-grid-tile>
+</mat-grid-list>
 <app-controller-run-list [runRecord]="this.runRecord"></app-controller-run-list>

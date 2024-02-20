@@ -1,9 +1,9 @@
 .timer-field {
-    width: 30%;
-    margin-right: 4px;
+    width: 80px;
+    margin-left: 4px;
   }
 
   .timer-button {
-    margin-right: 10px;
+    margin-left: 10px;
     margin-top: 4px;
   }

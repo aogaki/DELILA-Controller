@@ -1,5 +1,5 @@
 {
-    "apiAddress": "172.18.4.77:8000",
+    "apiAddress": "172.18.4.56:8000",
     "rootDir": "DELILA",
     "getStatus": "get-status",
     "configure": "configure",
@@ -13,5 +13,5 @@
     "createRecord": "create-new-run-record",
     "getRecords": "read-run-list",
     "updateRecord": "update-run-record",
-    "monitorAddress": "172.18.4.77:8080"
+    "monitorAddress": "172.18.6.93:8080"
 }

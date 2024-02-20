@@ -36,14 +36,28 @@ export class DelilaService {
   }
 
   postStop(): Observable<DelilaResponse> {
-    const url = this.baseUrl + "/" + this.serverSettings.stop;
-    return this.http.post<DelilaResponse>(url, "");
+    try {
+      const url = this.baseUrl + "/" + this.serverSettings.stop;
+      return this.http.post<DelilaResponse>(url, "");
+    } catch (err) {
+      console.log("Error occured.", err);
+      return this.errorHandler(err);
+    }
   }
 
   postConfigAndStart(runNo: number): Observable<DelilaResponse> {
-    const url =
-      this.baseUrl + "/" + this.serverSettings.configureAndStart + "/" + runNo;
-    return this.http.post<DelilaResponse>(url, "");
+    try {
+      const url =
+        this.baseUrl +
+        "/" +
+        this.serverSettings.configureAndStart +
+        "/" +
+        runNo;
+      return this.http.post<DelilaResponse>(url, "");
+    } catch (err) {
+      console.log("Error occured.", err);
+      return this.errorHandler(err);
+    }
   }
 
   postStopAndUnconfig(): Observable<DelilaResponse> {
@@ -115,5 +129,10 @@ export class DelilaService {
 
   getMonitorLinks(): Observable<MonitorLinks[]> {
     return this.http.get<MonitorLinks[]>("/assets/monitor-links.json");
+  }
+
+  private errorHandler(err: any) {
+    console.log("Error occured.", err);
+    return new Observable<DelilaResponse>();
   }
 }

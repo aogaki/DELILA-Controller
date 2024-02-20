@@ -1,11 +1,14 @@
 @if (this.status !== undefined) {
-<mat-table
+<table
+  mat-table
   [dataSource]="this.status.returnValue.logs.log"
   class="mat-elevation-z8"
 >
   <ng-container matColumnDef="compName">
     <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-    <mat-cell *matCellDef="let component"> {{ component.compName }} </mat-cell>
+    <mat-cell *matCellDef="let component">
+      {{ component.compName | groupMask }}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="state">
@@ -27,5 +30,5 @@
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-</mat-table>
+</table>
 }

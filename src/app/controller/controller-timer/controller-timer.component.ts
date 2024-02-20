@@ -95,6 +95,7 @@ export class ControllerTimerComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAnimationsExampleDialog);
     let audio = new Audio("assets/mixkit-battleship-alarm-1001.mp3");
     audio.play();
+    audio.loop = true;
     dialogRef.afterClosed().subscribe(() => {
       audio.pause();
       audio.currentTime = 0;
