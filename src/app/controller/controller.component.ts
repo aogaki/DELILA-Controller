@@ -293,18 +293,17 @@ export class ControllerComponent implements OnInit {
     });
   }
 
-  createRecord(): Observable<RunLog> {
-    var newRun: RunLog = {
-      runNumber: this.runNo,
-      start: Date.now(),
-      stop: 0,
-      expName: this.expName,
-      source: this.source,
-      distance: this.distance,
-      comment: this.comment,
-    };
-
-    return this.delila.createRecord(newRun);
+  createRecord() {
+    console.log("Creating record", this.nextRunNo);
+    this.currentRun.runNumber = this.runNo;
+    this.currentRun.start = Date.now();
+    this.currentRun.stop = 0;
+    this.currentRun.source = this.source;
+    this.currentRun.distance = this.distance;
+    this.currentRun.comment = this.comment;
+    this.delila.createRecord(this.currentRun).subscribe((response) => {
+      console.log("Record created", response);
+    });
   }
 
   updateRecord(): Observable<RunLog> {

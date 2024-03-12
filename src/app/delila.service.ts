@@ -77,6 +77,7 @@ export class DelilaService {
 
   createRecord(runLog: RunLog): Observable<RunLog> {
     const url = this.baseDBUrl + "/" + this.serverSettings.createRecord;
+    console.log("Create record", runLog);
     return this.http.post<RunLog>(url, runLog);
   }
 
