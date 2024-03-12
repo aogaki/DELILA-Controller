@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { ServerSettings, ExperimentSettings } from "./server-settings";
-import { Observable } from "rxjs";
+import { Observable, throwError, catchError, retry } from "rxjs";
 import { DelilaResponse } from "./delila-response";
 import { RunLog } from "./run-log";
 import { MonitorLinks } from "./monitor-links";
@@ -15,59 +15,64 @@ export class DelilaService {
   baseDBUrl!: string;
   private readonly http = inject(HttpClient);
 
+  nRetry = 3;
+
   getStatus(): Observable<DelilaResponse> {
     const url = this.baseUrl + "/" + this.serverSettings.getStatus;
-    return this.http.get<DelilaResponse>(url);
+    return this.http
+      .get<DelilaResponse>(url)
+      .pipe(catchError(this.handleError));
   }
 
   postConfig(): Observable<DelilaResponse> {
     const url = this.baseUrl + "/" + this.serverSettings.configure;
-    return this.http.post<DelilaResponse>(url, "");
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(retry(this.nRetry), catchError(this.handleError));
   }
 
   postUnconfig(): Observable<DelilaResponse> {
     const url = this.baseUrl + "/" + this.serverSettings.unconfigure;
-    return this.http.post<DelilaResponse>(url, "");
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(retry(this.nRetry), catchError(this.handleError));
   }
 
   postStart(runNo: number): Observable<DelilaResponse> {
     const url = this.baseUrl + "/" + this.serverSettings.start + "/" + runNo;
-    return this.http.post<DelilaResponse>(url, "");
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(retry(this.nRetry), catchError(this.handleError));
   }
 
   postStop(): Observable<DelilaResponse> {
-    try {
-      const url = this.baseUrl + "/" + this.serverSettings.stop;
-      return this.http.post<DelilaResponse>(url, "");
-    } catch (err) {
-      console.log("Error occured.", err);
-      return this.errorHandler(err);
-    }
+    const url = this.baseUrl + "/" + this.serverSettings.stop;
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(retry(this.nRetry), catchError(this.handleError));
   }
 
   postConfigAndStart(runNo: number): Observable<DelilaResponse> {
-    try {
-      const url =
-        this.baseUrl +
-        "/" +
-        this.serverSettings.configureAndStart +
-        "/" +
-        runNo;
-      return this.http.post<DelilaResponse>(url, "");
-    } catch (err) {
-      console.log("Error occured.", err);
-      return this.errorHandler(err);
-    }
+    const url =
+      this.baseUrl + "/" + this.serverSettings.configureAndStart + "/" + runNo;
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(retry(this.nRetry), catchError(this.handleError));
   }
 
   postStopAndUnconfig(): Observable<DelilaResponse> {
+    // Implementing error handler
     const url = this.baseUrl + "/" + this.serverSettings.stopAndUnconfigure;
-    return this.http.post<DelilaResponse>(url, "");
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(retry(this.nRetry), catchError(this.handleError));
   }
 
   postDryRun(): Observable<DelilaResponse> {
     const url = this.baseUrl + "/" + this.serverSettings.dryRun;
-    return this.http.post<DelilaResponse>(url, "");
+    return this.http
+      .post<DelilaResponse>(url, "")
+      .pipe(catchError(this.handleError));
   }
 
   createRecord(runLog: RunLog): Observable<RunLog> {
@@ -131,8 +136,21 @@ export class DelilaService {
     return this.http.get<MonitorLinks[]>("/assets/monitor-links.json");
   }
 
-  private errorHandler(err: any) {
-    console.log("Error occured.", err);
-    return new Observable<DelilaResponse>();
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error("An error occurred:", error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(
+      () => new Error("Something bad happened; please try again later.")
+    );
   }
 }

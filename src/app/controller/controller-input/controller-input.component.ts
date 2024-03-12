@@ -63,7 +63,7 @@ export class ControllerInputComponent {
 
   @Input() spinnerFlag!: boolean;
 
-  devMode: boolean = false;
+  devMode: boolean = true;
 
   constructor(
     private controller: ControllerComponent,

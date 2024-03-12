@@ -1,5 +1,5 @@
 // This is ROOT macro to generate the link URL
-// For all histogramsin 4x4 matrix
+// For all histograms in 4x4 matrix
 
 #include <array>
 #include <iostream>
@@ -9,11 +9,11 @@
 
 void link_gen()
 {
-  const auto nMods = 1;
+  const auto nMods = 10;
   const auto nChs = 64;
 
   const auto base_url =
-      "http://172.18.4.77:8080/"
+      "http://172.18.6.59:8080/"
       "?nobrowser&monitoring=5000&layout=grid4x4";
 
   std::vector<std::array<std::string, 2>> links;
@@ -46,3 +46,12 @@ void link_gen()
     std::cout << std::endl;
   }
 }
+
+//  {
+//       "name": "Si Histograms 1sec",
+//       "url": "http://172.18.6.59:8080/?nobrowser&monitoring=1000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
+//   },
+//   {
+//       "name": "Si Histograms 5sec",
+//       "url": "http://172.18.6.59:8080/?nobrowser&monitoring=5000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
+//   },

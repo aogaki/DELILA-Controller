@@ -10,6 +10,7 @@ import { ControllerRunListComponent } from "./controller-run-list/controller-run
 import { DelilaService } from "./../delila.service";
 import { ControllerInputComponent } from "./controller-input/controller-input.component";
 import { ControllerTimerComponent } from "./controller-timer/controller-timer.component";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-controller",
@@ -64,7 +65,15 @@ export class ControllerComponent implements OnInit {
   recordLength = 10;
   updateInterval = 1000;
   ngOnInit() {
-    window.innerWidth < 1400 ? (this.nCols = 2) : (this.nCols = 4);
+    if (window.innerWidth >= 1400) {
+      this.nCols = 4;
+    } else {
+      if (window.innerWidth >= 800) {
+        this.nCols = 2;
+      } else {
+        this.nCols = 1;
+      }
+    }
 
     this.delila.loadServerSettings();
     this.delila.loadExperimentSettings().subscribe((response) => {
@@ -76,13 +85,21 @@ export class ControllerComponent implements OnInit {
     });
 
     setInterval(() => {
-      if (this.appVisibility()) this.getStatus();
+      if (this.appVisibility() && this.checkStatusFlag) this.getStatus();
     }, this.updateInterval);
   }
 
   nCols = 2;
   onResize(event: any) {
-    event.target.innerWidth < 1400 ? (this.nCols = 2) : (this.nCols = 4);
+    if (event.target.innerWidth >= 1400) {
+      this.nCols = 4;
+    } else {
+      if (event.target.innerWidth >= 800) {
+        this.nCols = 2;
+      } else {
+        this.nCols = 1;
+      }
+    }
   }
 
   source: string = "";
@@ -132,63 +149,68 @@ export class ControllerComponent implements OnInit {
 
   delilaStatus$!: DelilaStatus;
   getStatus() {
-    if (this.checkStatusFlag) {
-      this.delila.getStatus().subscribe((response) => {
-        if (response === undefined) {
-          this.connFlag = false;
-        } else {
-          if (this.spinnerFlag) {
-            this.delila.postStopAndUnconfig().subscribe((response) => {
-              console.log("Stop and unconfig posted", response);
-              this.getStatus();
-              this.spinnerFlag = false;
-              this.getRunLog(this.recordLength);
-            });
-          }
-          this.connFlag = true;
-          this.delilaStatus$ = response.response;
-          this.logs = this.delilaStatus$.returnValue.logs["log"];
-          const state = this.logs[0].state;
-          switch (state) {
-            case "LOADED":
-              this.ResetState();
-              this.daqButtonState.configure = true;
-              this.daqButtonState.confAndStart = true;
-              break;
+    this.delila.getStatus().subscribe((response) => {
+      if (response === undefined) {
+        this.connFlag = false;
+      } else if ((response as any).status == "busy") {
+        // DAQ-Middleware is busy.  Do nothing.
+      } else {
+        this.connFlag = true;
+        this.delilaStatus$ = response.response;
+        this.logs = this.delilaStatus$.returnValue.logs["log"];
+        const state = this.logs[0].state;
+        switch (state) {
+          case "LOADED":
+            this.ResetState();
+            this.daqButtonState.configure = true;
+            this.daqButtonState.confAndStart = true;
+            break;
 
-            case "CONFIGURED":
-              this.ResetState();
-              this.daqButtonState.start = true;
-              this.daqButtonState.unconfigure = true;
-              this.daqButtonState.confAndStart = true;
-              break;
+          case "CONFIGURED":
+            this.ResetState();
+            this.daqButtonState.start = true;
+            this.daqButtonState.unconfigure = true;
+            this.daqButtonState.confAndStart = true;
+            break;
 
-            case "RUNNING":
-              this.ResetState();
-              this.daqButtonState.stop = true;
-              this.daqButtonState.pause = true;
-              this.daqButtonState.stopAndUnconf = true;
-              break;
+          case "RUNNING":
+            this.ResetState();
+            this.daqButtonState.stop = true;
+            this.daqButtonState.pause = true;
+            this.daqButtonState.stopAndUnconf = true;
+            break;
 
-            default:
-              break;
-          }
+          default:
+            break;
         }
-      });
+      }
+    });
+
+    if (this.autoIncFlag === true && this.currentRun.expName !== "") {
+      this.delila
+        .getRunLog(this.currentRun.expName, 1)
+        .subscribe((response) => {
+          if (response.length > 0) {
+            this.currentRun.runNumber = response[0].runNumber;
+            if (this.autoIncFlag) {
+              this.nextRunNo = this.currentRun.runNumber + 1;
+            }
+          }
+        });
     }
   }
 
   onPostConfig() {
-    this.checkStatusFlag = false;
+    this.spinnerFlag = true;
     this.delila.postConfig().subscribe((response) => {
       console.log("Config posted", response);
       this.checkStatusFlag = true;
       this.getStatus();
+      this.spinnerFlag = false;
     });
   }
 
   onPostUnconfig() {
-    this.checkStatusFlag = false;
     this.delila.postUnconfig().subscribe((response) => {
       console.log("Unconfig posted", response);
       this.checkStatusFlag = true;
@@ -197,7 +219,6 @@ export class ControllerComponent implements OnInit {
   }
 
   onPostStart() {
-    this.checkStatusFlag = false;
     this.runNo = this.nextRunNo;
     this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
     this.delila.postStart(this.runNo).subscribe((response) => {
@@ -212,39 +233,45 @@ export class ControllerComponent implements OnInit {
   onPostStop() {
     this.spinnerFlag = true;
     this.daqButtonState.stop = false;
-    this.updateRecord();
-
-    this.delila.postStop().subscribe((response) => {
-      console.log("Stop posted", response);
-      this.getStatus();
-      this.spinnerFlag = false;
-      this.getRunLog(this.recordLength);
+    this.updateRecord().subscribe((response) => {
+      this.delila.postStop().subscribe((response) => {
+        console.log("Stop posted", response);
+        this.getRunLog(this.recordLength);
+        this.spinnerFlag = false;
+        this.checkStatusFlag = true;
+        this.getStatus();
+      });
     });
   }
 
   onPostConfigAndStart() {
-    this.checkStatusFlag = false;
     this.runNo = this.nextRunNo;
     this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
-    this.delila.postConfigAndStart(this.runNo).subscribe((response) => {
-      console.log("Config and start posted", response);
-      this.createRecord();
-      this.checkStatusFlag = true;
-      this.getStatus();
-      this.getRunLog(this.recordLength);
+    this.spinnerFlag = true;
+    this.delila.postConfig().subscribe((response) => {
+      console.log("Config posted", response);
+      this.delila.postStart(this.runNo).subscribe((response) => {
+        console.log("Start posted", response);
+        this.createRecord();
+        this.checkStatusFlag = true;
+        this.getStatus();
+        this.getRunLog(this.recordLength);
+        this.spinnerFlag = false;
+      });
     });
   }
 
   onPostStopAndUnconfig() {
     this.spinnerFlag = true;
     this.daqButtonState.stop = false;
-    this.updateRecord();
-
-    this.delila.postStopAndUnconfig().subscribe((response) => {
-      console.log("Stop and unconfig posted", response);
-      this.getStatus();
-      this.spinnerFlag = false;
-      this.getRunLog(this.recordLength);
+    this.updateRecord().subscribe((response) => {
+      this.delila.postStopAndUnconfig().subscribe((response) => {
+        console.log("Stop and unconfig posted", response);
+        this.getRunLog(this.recordLength);
+        this.spinnerFlag = false;
+        this.checkStatusFlag = true;
+        this.getStatus();
+      });
     });
   }
 
@@ -266,25 +293,29 @@ export class ControllerComponent implements OnInit {
     });
   }
 
-  createRecord() {
-    this.currentRun.runNumber = this.runNo;
-    this.currentRun.start = Date.now();
-    this.currentRun.stop = 0;
-    this.currentRun.source = this.source;
-    this.currentRun.distance = this.distance;
-    this.currentRun.comment = this.comment;
-    this.delila.createRecord(this.currentRun).subscribe((response) => {
-      console.log("Record created", response);
-    });
+  createRecord(): Observable<RunLog> {
+    var newRun: RunLog = {
+      runNumber: this.runNo,
+      start: Date.now(),
+      stop: 0,
+      expName: this.expName,
+      source: this.source,
+      distance: this.distance,
+      comment: this.comment,
+    };
+
+    return this.delila.createRecord(newRun);
   }
 
-  updateRecord() {
+  updateRecord(): Observable<RunLog> {
     this.currentRun.stop = Date.now();
     this.currentRun.source = this.source;
     this.currentRun.distance = this.distance;
     this.currentRun.comment = this.comment;
-    this.delila.updateRecord(this.currentRun).subscribe((response) => {
-      console.log("Record updated", response, this.currentRun);
-    });
+    // return this.delila.updateRecord(this.currentRun).subscribe((response) => {
+    //   console.log("Record updated", response, this.currentRun);
+    // });
+
+    return this.delila.updateRecord(this.currentRun);
   }
 }

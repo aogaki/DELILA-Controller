@@ -2,6 +2,7 @@
   {{ this.expName }} &#64; {{ this.computerName }}
 </h1>
 
+@if ((this.connFlag)) {
 <mat-grid-list
   cols="{{ this.nCols }}"
   rowHeight="400px"
@@ -37,3 +38,6 @@
   ></mat-grid-tile>
 </mat-grid-list>
 <app-controller-run-list [runRecord]="this.runRecord"></app-controller-run-list>
+} @else {
+<h1 style="text-align: center">No connection to the server</h1>
+}

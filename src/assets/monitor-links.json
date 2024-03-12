@@ -4,27 +4,75 @@
         "url": "http://172.18.4.77:8080/"
     },
     {
-        "name": "Si Histograms 1sec",
-        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=1000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
-    },
-    {
-        "name": "Si Histograms 5sec",
-        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&optstat=0000&layout=horiz2&items=[SiHist_front,SiHist_rear]&opts=[colz,colz]"
-    },
-    {
         "name": "Brd00 Ch00 to 15",
         "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_00,Brd00/ADC00_01,Brd00/ADC00_02,Brd00/ADC00_03,Brd00/ADC00_04,Brd00/ADC00_05,Brd00/ADC00_06,Brd00/ADC00_07,Brd00/ADC00_08,Brd00/ADC00_09,Brd00/ADC00_10,Brd00/ADC00_11,Brd00/ADC00_12,Brd00/ADC00_13,Brd00/ADC00_14,Brd00/ADC00_15]"
     },
     {
-        "name": "Brd00 Ch16 to 31",
-        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_16,Brd00/ADC00_17,Brd00/ADC00_18,Brd00/ADC00_19,Brd00/ADC00_20,Brd00/ADC00_21,Brd00/ADC00_22,Brd00/ADC00_23,Brd00/ADC00_24,Brd00/ADC00_25,Brd00/ADC00_26,Brd00/ADC00_27,Brd00/ADC00_28,Brd00/ADC00_29,Brd00/ADC00_30,Brd00/ADC00_31]"
+        "name": "Brd01 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd01/ADC01_00,Brd01/ADC01_01,Brd01/ADC01_02,Brd01/ADC01_03,Brd01/ADC01_04,Brd01/ADC01_05,Brd01/ADC01_06,Brd01/ADC01_07,Brd01/ADC01_08,Brd01/ADC01_09,Brd01/ADC01_10,Brd01/ADC01_11,Brd01/ADC01_12,Brd01/ADC01_13,Brd01/ADC01_14,Brd01/ADC01_15]"
     },
     {
-        "name": "Brd00 Ch32 to 47",
-        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_32,Brd00/ADC00_33,Brd00/ADC00_34,Brd00/ADC00_35,Brd00/ADC00_36,Brd00/ADC00_37,Brd00/ADC00_38,Brd00/ADC00_39,Brd00/ADC00_40,Brd00/ADC00_41,Brd00/ADC00_42,Brd00/ADC00_43,Brd00/ADC00_44,Brd00/ADC00_45,Brd00/ADC00_46,Brd00/ADC00_47]"
+        "name": "Brd02 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd02/ADC02_00,Brd02/ADC02_01,Brd02/ADC02_02,Brd02/ADC02_03,Brd02/ADC02_04,Brd02/ADC02_05,Brd02/ADC02_06,Brd02/ADC02_07,Brd02/ADC02_08,Brd02/ADC02_09,Brd02/ADC02_10,Brd02/ADC02_11,Brd02/ADC02_12,Brd02/ADC02_13,Brd02/ADC02_14,Brd02/ADC02_15]"
     },
     {
-        "name": "Brd00 Ch48 to 63",
-        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_48,Brd00/ADC00_49,Brd00/ADC00_50,Brd00/ADC00_51,Brd00/ADC00_52,Brd00/ADC00_53,Brd00/ADC00_54,Brd00/ADC00_55,Brd00/ADC00_56,Brd00/ADC00_57,Brd00/ADC00_58,Brd00/ADC00_59,Brd00/ADC00_60,Brd00/ADC00_61,Brd00/ADC00_62,Brd00/ADC00_63]"
+        "name": "Brd03 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd03/ADC03_00,Brd03/ADC03_01,Brd03/ADC03_02,Brd03/ADC03_03,Brd03/ADC03_04,Brd03/ADC03_05,Brd03/ADC03_06,Brd03/ADC03_07,Brd03/ADC03_08,Brd03/ADC03_09,Brd03/ADC03_10,Brd03/ADC03_11,Brd03/ADC03_12,Brd03/ADC03_13,Brd03/ADC03_14,Brd03/ADC03_15]"
+    },
+    {
+        "name": "Brd04 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd04/ADC04_00,Brd04/ADC04_01,Brd04/ADC04_02,Brd04/ADC04_03,Brd04/ADC04_04,Brd04/ADC04_05,Brd04/ADC04_06,Brd04/ADC04_07,Brd04/ADC04_08,Brd04/ADC04_09,Brd04/ADC04_10,Brd04/ADC04_11,Brd04/ADC04_12,Brd04/ADC04_13,Brd04/ADC04_14,Brd04/ADC04_15]"
+    },
+    {
+        "name": "Brd05 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd05/ADC05_00,Brd05/ADC05_01,Brd05/ADC05_02,Brd05/ADC05_03,Brd05/ADC05_04,Brd05/ADC05_05,Brd05/ADC05_06,Brd05/ADC05_07,Brd05/ADC05_08,Brd05/ADC05_09,Brd05/ADC05_10,Brd05/ADC05_11,Brd05/ADC05_12,Brd05/ADC05_13,Brd05/ADC05_14,Brd05/ADC05_15]"
+    },
+    {
+        "name": "Brd06 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd06/ADC06_00,Brd06/ADC06_01,Brd06/ADC06_02,Brd06/ADC06_03,Brd06/ADC06_04,Brd06/ADC06_05,Brd06/ADC06_06,Brd06/ADC06_07,Brd06/ADC06_08,Brd06/ADC06_09,Brd06/ADC06_10,Brd06/ADC06_11,Brd06/ADC06_12,Brd06/ADC06_13,Brd06/ADC06_14,Brd06/ADC06_15]"
+    },
+    {
+        "name": "Brd07 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd07/ADC07_00,Brd07/ADC07_01,Brd07/ADC07_02,Brd07/ADC07_03,Brd07/ADC07_04,Brd07/ADC07_05,Brd07/ADC07_06,Brd07/ADC07_07,Brd07/ADC07_08,Brd07/ADC07_09,Brd07/ADC07_10,Brd07/ADC07_11,Brd07/ADC07_12,Brd07/ADC07_13,Brd07/ADC07_14,Brd07/ADC07_15]"
+    },
+    {
+        "name": "Brd08 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd08/ADC08_00,Brd08/ADC08_01,Brd08/ADC08_02,Brd08/ADC08_03,Brd08/ADC08_04,Brd08/ADC08_05,Brd08/ADC08_06,Brd08/ADC08_07,Brd08/ADC08_08,Brd08/ADC08_09,Brd08/ADC08_10,Brd08/ADC08_11,Brd08/ADC08_12,Brd08/ADC08_13,Brd08/ADC08_14,Brd08/ADC08_15]"
+    },
+    {
+        "name": "LogY Brd00 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd00/ADC00_00,Brd00/ADC00_01,Brd00/ADC00_02,Brd00/ADC00_03,Brd00/ADC00_04,Brd00/ADC00_05,Brd00/ADC00_06,Brd00/ADC00_07,Brd00/ADC00_08,Brd00/ADC00_09,Brd00/ADC00_10,Brd00/ADC00_11,Brd00/ADC00_12,Brd00/ADC00_13,Brd00/ADC00_14,Brd00/ADC00_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd01 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd01/ADC01_00,Brd01/ADC01_01,Brd01/ADC01_02,Brd01/ADC01_03,Brd01/ADC01_04,Brd01/ADC01_05,Brd01/ADC01_06,Brd01/ADC01_07,Brd01/ADC01_08,Brd01/ADC01_09,Brd01/ADC01_10,Brd01/ADC01_11,Brd01/ADC01_12,Brd01/ADC01_13,Brd01/ADC01_14,Brd01/ADC01_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd02 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd02/ADC02_00,Brd02/ADC02_01,Brd02/ADC02_02,Brd02/ADC02_03,Brd02/ADC02_04,Brd02/ADC02_05,Brd02/ADC02_06,Brd02/ADC02_07,Brd02/ADC02_08,Brd02/ADC02_09,Brd02/ADC02_10,Brd02/ADC02_11,Brd02/ADC02_12,Brd02/ADC02_13,Brd02/ADC02_14,Brd02/ADC02_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd03 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd03/ADC03_00,Brd03/ADC03_01,Brd03/ADC03_02,Brd03/ADC03_03,Brd03/ADC03_04,Brd03/ADC03_05,Brd03/ADC03_06,Brd03/ADC03_07,Brd03/ADC03_08,Brd03/ADC03_09,Brd03/ADC03_10,Brd03/ADC03_11,Brd03/ADC03_12,Brd03/ADC03_13,Brd03/ADC03_14,Brd03/ADC03_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd04 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd04/ADC04_00,Brd04/ADC04_01,Brd04/ADC04_02,Brd04/ADC04_03,Brd04/ADC04_04,Brd04/ADC04_05,Brd04/ADC04_06,Brd04/ADC04_07,Brd04/ADC04_08,Brd04/ADC04_09,Brd04/ADC04_10,Brd04/ADC04_11,Brd04/ADC04_12,Brd04/ADC04_13,Brd04/ADC04_14,Brd04/ADC04_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd05 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd05/ADC05_00,Brd05/ADC05_01,Brd05/ADC05_02,Brd05/ADC05_03,Brd05/ADC05_04,Brd05/ADC05_05,Brd05/ADC05_06,Brd05/ADC05_07,Brd05/ADC05_08,Brd05/ADC05_09,Brd05/ADC05_10,Brd05/ADC05_11,Brd05/ADC05_12,Brd05/ADC05_13,Brd05/ADC05_14,Brd05/ADC05_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd06 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd06/ADC06_00,Brd06/ADC06_01,Brd06/ADC06_02,Brd06/ADC06_03,Brd06/ADC06_04,Brd06/ADC06_05,Brd06/ADC06_06,Brd06/ADC06_07,Brd06/ADC06_08,Brd06/ADC06_09,Brd06/ADC06_10,Brd06/ADC06_11,Brd06/ADC06_12,Brd06/ADC06_13,Brd06/ADC06_14,Brd06/ADC06_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "LogY Brd07 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd07/ADC07_00,Brd07/ADC07_01,Brd07/ADC07_02,Brd07/ADC07_03,Brd07/ADC07_04,Brd07/ADC07_05,Brd07/ADC07_06,Brd07/ADC07_07,Brd07/ADC07_08,Brd07/ADC07_09,Brd07/ADC07_10,Brd07/ADC07_11,Brd07/ADC07_12,Brd07/ADC07_13,Brd07/ADC07_14,Brd07/ADC07_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
+    },
+    {
+        "name": "Brd08 Ch00 to 15",
+        "url": "http://172.18.4.77:8080/?nobrowser&monitoring=5000&layout=grid4x4&items=[Brd08/ADC08_00,Brd08/ADC08_01,Brd08/ADC08_02,Brd08/ADC08_03,Brd08/ADC08_04,Brd08/ADC08_05,Brd08/ADC08_06,Brd08/ADC08_07,Brd08/ADC08_08,Brd08/ADC08_09,Brd08/ADC08_10,Brd08/ADC08_11,Brd08/ADC08_12,Brd08/ADC08_13,Brd08/ADC08_14,Brd08/ADC08_15]&opts=[logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy,logy]"
     }
 ]
