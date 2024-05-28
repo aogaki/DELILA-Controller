@@ -12,10 +12,15 @@
       {{ run.start | date : "YYYY-MM-dd, 'week 'w, HH:mm:ss" }}</mat-list-item
     >
     <mat-divider></mat-divider>
+    @if (this.run.stop !== 0) {
     <mat-list-item
       >Stop:
-      {{ run.stop | date : "YYYY-MM-dd, 'week 'w, HH:mm:ss" }}</mat-list-item
-    >
+      {{
+        this.run.stop | date : "YYYY-MM-dd, 'week ' w, HH:mm:ss"
+      }}</mat-list-item
+    >} @else {
+    <mat-list-item>Stop: Not stopped yet</mat-list-item>
+    }
     <mat-divider></mat-divider>
     <mat-list-item>Source: {{ run.source }}</mat-list-item>
     <mat-divider></mat-divider>

@@ -10,7 +10,7 @@ import { ControllerRunListComponent } from "./controller-run-list/controller-run
 import { DelilaService } from "./../delila.service";
 import { ControllerInputComponent } from "./controller-input/controller-input.component";
 import { ControllerTimerComponent } from "./controller-timer/controller-timer.component";
-import { Observable } from "rxjs";
+import { Observable, timer } from "rxjs";
 
 @Component({
   selector: "app-controller",
@@ -195,6 +195,8 @@ export class ControllerComponent implements OnInit {
             if (this.autoIncFlag) {
               this.nextRunNo = this.currentRun.runNumber + 1;
             }
+            this.currentRun.start = response[0].start;
+            this.currentRun.stop = response[0].stop;
           }
         });
     }
@@ -244,20 +246,36 @@ export class ControllerComponent implements OnInit {
     });
   }
 
+  // onPostConfigAndStart() {
+  //   this.runNo = this.nextRunNo;
+  //   this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
+  //   this.spinnerFlag = true;
+  //   this.delila.postConfig().subscribe((response) => {
+  //     console.log("Config posted", response);
+  //     timer(1000).subscribe(() => {
+  //       this.delila.postStart(this.runNo).subscribe((response) => {
+  //         console.log("Start posted", response);
+  //         this.createRecord();
+  //         this.checkStatusFlag = true;
+  //         this.getStatus();
+  //         this.getRunLog(this.recordLength);
+  //         this.spinnerFlag = false;
+  //       });
+  //     });
+  //   });
+  // }
+
   onPostConfigAndStart() {
     this.runNo = this.nextRunNo;
     this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
     this.spinnerFlag = true;
-    this.delila.postConfig().subscribe((response) => {
-      console.log("Config posted", response);
-      this.delila.postStart(this.runNo).subscribe((response) => {
-        console.log("Start posted", response);
-        this.createRecord();
-        this.checkStatusFlag = true;
-        this.getStatus();
-        this.getRunLog(this.recordLength);
-        this.spinnerFlag = false;
-      });
+    this.delila.postConfigAndStart(this.runNo).subscribe((response) => {
+      console.log("Config and start posted", response);
+      this.createRecord();
+      this.checkStatusFlag = true;
+      this.getStatus();
+      this.getRunLog(this.recordLength);
+      this.spinnerFlag = false;
     });
   }
 

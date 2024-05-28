@@ -18,7 +18,9 @@
 
   <ng-container matColumnDef="eventNum">
     <mat-header-cell *matHeaderCellDef> Data size </mat-header-cell>
-    <mat-cell *matCellDef="let component"> {{ component.eventNum }} </mat-cell>
+    <mat-cell *matCellDef="let component">
+      {{ component.eventNum / 1000000 | number : "1.0-2" }} <br />MB
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="compStatus">
