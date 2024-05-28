@@ -246,25 +246,6 @@ export class ControllerComponent implements OnInit {
     });
   }
 
-  // onPostConfigAndStart() {
-  //   this.runNo = this.nextRunNo;
-  //   this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
-  //   this.spinnerFlag = true;
-  //   this.delila.postConfig().subscribe((response) => {
-  //     console.log("Config posted", response);
-  //     timer(1000).subscribe(() => {
-  //       this.delila.postStart(this.runNo).subscribe((response) => {
-  //         console.log("Start posted", response);
-  //         this.createRecord();
-  //         this.checkStatusFlag = true;
-  //         this.getStatus();
-  //         this.getRunLog(this.recordLength);
-  //         this.spinnerFlag = false;
-  //       });
-  //     });
-  //   });
-  // }
-
   onPostConfigAndStart() {
     this.runNo = this.nextRunNo;
     this.nextRunNo = this.autoIncFlag ? this.nextRunNo + 1 : this.nextRunNo;
